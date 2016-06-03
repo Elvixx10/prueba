@@ -1,0 +1,51 @@
+<?php
+$this -> title = 'Detalle del contacto';
+$this -> headTitle($this -> title, 'PREPEND');
+?>
+<div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<h3>Detalle del contacto</h3>
+	</div>
+
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<h3 class="text-right">
+			<a class="btn btn-success" href="<?php echo $this->baseUrl() . "/"; ?>">Regresar</a>
+		</h3>
+	</div>
+</div>
+
+<hr />
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="list-group">
+			<a href="javascript:;" class="list-group-item active"> 
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4">
+						<h4 class="list-group-item-heading">Nombre: <?php echo $this->contacto['nombre']?></h4>
+					</div>
+					
+					<div class="col-lg-4 col-md-4 col-sm-4">
+						<p class="list-group-item-text">
+							Correo: <?php echo $this->contacto['correo']?>
+						</p> 
+					</div>
+					
+					<div class="col-lg-4 col-md-4 col-sm-4">
+						Fecha de creación: <?php echo date('d-m-Y', strtotime($this->contacto['creacion'])) ?>
+					</div>
+				</div>
+			</a>
+			<div class="list-group-item active"> 
+				<h4>Teléfonos de contacto</h4>
+			</div>
+			<?php  foreach($this->telefono as $value) : ?>
+			<a href="javascript:;" class="list-group-item"> 
+				<h4 class="list-group-item-heading"><?php echo $value['numero'] ?></h4>
+				<p class="list-group-item-text">
+					Creado: <?php echo date('d-m-Y', strtotime($value['creado']) )  ?>
+				</p> 
+			</a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</div>
