@@ -53,7 +53,7 @@
     //span
     //img
     //p
-  
+
     if( (e.target.nodeName === "BUTTON" || e.target.nodeName == 'BUTTON') ||
         (e.target.nodeName === "DIV" || e.target.nodeName == 'DIV')
     ) {
@@ -62,6 +62,24 @@
 
       if (ls.getItem('dataObject') && ls.getItem('dataObject').length > 0) {
           dataObject = JSON.parse(ls.getItem('dataObject'));
+      }
+
+      //TODO: obteniendo listado de vistas a nivel general
+      if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
+          url_save = JSON.parse(ls.getItem('url_save'));
+      }
+
+      //c(url_save)
+      var _switch = false;
+      for(var i in url_save) {
+        if(url_save[i] == url) {
+          _switch = true;
+          break;
+        }
+      }
+
+      if(_switch){
+        return false;
       }
 
       //TODO: nuevo
@@ -76,7 +94,7 @@
           (e.target.parentNode.className == 'navigate-right enabled' || e.target.parentNode.className == "navigate-right enabled") ||
           (e.target.parentNode.className == 'navigate-right highlight enabled' || e.target.parentNode.className == "navigate-right highlight enabled") ||
           (e.target.parentNode.className == 'navigate-down enabled' || e.target.parentNode.className == "navigate-down enabled") ||
-          (e.target.parentNode.className == 'navigate-down' || e.target.parentNode.className == "navigate-down") 
+          (e.target.parentNode.className == 'navigate-down' || e.target.parentNode.className == "navigate-down")
         )
       ){
         var present =  d.querySelector('section.present')
@@ -153,20 +171,6 @@
           ls.setItem('dataObject', JSON.stringify(dataObject));
           //c(dataObject)
         }
-
-        //TODO: obteniendo listado de vistas a nivel general
-        if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
-            url_save = JSON.parse(ls.getItem('url_save'));
-        }
-        //c(url_save)
-        var _switch = false;
-        for(var i in url_save) {
-          if(url_save[i] == url) {
-            _switch = true;
-          }
-        }
-
-        //c(_switch)
 
         if(!_switch) {
           url_obj=url;
@@ -310,6 +314,24 @@
           dataObject = JSON.parse(ls.getItem('dataObject'));
       }
 
+      //TODO: obteniendo listado de vistas a nivel general
+      if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
+          url_save = JSON.parse(ls.getItem('url_save'));
+      }
+
+      //c(url_save)
+      var _switch = false;
+      for(var i in url_save) {
+        if(url_save[i] == url) {
+          _switch = true;
+          break;
+        }
+      }
+
+      if(_switch){
+        return false;
+      }
+
       //TODO: nuevo
       if(
         (e.code=='ArrowRight' || e.code == "ArrowRight") ||
@@ -328,7 +350,7 @@
         c(count_previous_indexv)
         return false;*/
         //c(dataObject)
-        
+
         var block = false;
         var path = null;
         var _ok = false;
@@ -369,7 +391,7 @@
           location.href = path;
           return false;
         }
-        
+
         var searching_between_url = ( dataObject.find(el => el.url === url) ? true : false);
         c(searching_between_url)
         if( !searching_between_url && (
@@ -393,19 +415,6 @@
           //c(dataObject)
         }
 
-        //TODO: obteniendo listado de vistas a nivel general
-        if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
-            url_save = JSON.parse(ls.getItem('url_save'));
-        }
-        //c(url_save)
-        var _switch = false;
-        for(var i in url_save) {
-          if(url_save[i] == url) {
-            _switch = true;
-          }
-        }
-
-        //c(_switch)
         if(!_switch) {
           url_obj=url;
           url_save.push(url_obj);
