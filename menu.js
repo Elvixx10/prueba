@@ -800,36 +800,49 @@
 
   removedisabled = function(href) {
     var element = w.location.href+href;
-    if(ls.sequencing == element) {
-      
-      if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
-        url_save = JSON.parse(ls.getItem('url_save'));
-      }
 
-      url_obj = element;
-      url_save.push(url_obj);
-      ls.setItem('url_save', JSON.stringify(url_save));
-      ls.setItem("url", element);
- 
-      var _switch = false;
-      for (var i in url_save) {
-        if (url_save[i] == element) {
-          _switch = true;
-          break;
-        }
+    if (ls.getItem('url_save') && ls.getItem('url_save').length > 0) {
+      url_save = JSON.parse(ls.getItem('url_save'));
+    }
+
+    var _switch=false;
+    for(var i in url_save) {
+      if(url_save[i] == element) {
+        _switch=true;
+        break;
       }
+    }
+    c(_switch)
+
+    if ( !_switch ) {
+      if(ls.sequencing == element) {
+        url_obj = element;
+        url_save.push(url_obj);
+        ls.setItem('url_save', JSON.stringify(url_save));
+        ls.setItem("url", element);
   
-      c(_switch)
+        var _switch = false;
+        for (var i in url_save) {
+          if (url_save[i] == element) {
+            _switch = true;
+            break;
+          }
+        }
     
-      if(_switch) {
-        var str = href;
-        var res = str.replace("/", "");
-        var _number = parseInt(res)+1;
-        ls.sequencing =  w.location.href+'/'+_number;
-        w.location.href = element;
+        c(_switch)
+      
+        if(_switch) {
+          var str = href;
+          var res = str.replace("/", "");
+          var _number = parseInt(res)+1;
+          ls.sequencing =  w.location.href+'/'+_number;
+          w.location.href = element;
+        }
+      } else {
+        alert("Debe seguir la secuencia.!!");
       }
     } else {
-      alert("Debe seguir la secuencia.!!");
+      w.location.href = element;
     }
     return false;
   }
