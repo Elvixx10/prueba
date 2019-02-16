@@ -1,5 +1,14 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 ((d, w, c, ls) => {
+  Reveal.configure({ 
+    //slideNumber: false,
+    //progress: false,
+    touch: false,
+    keyboard: {
+      32: null
+    }
+  });
+  
   var menu = d.getElementById("showmenu"),
     menuContainer = d.getElementById("menu-container"),
     menuAcordeon = d.getElementById('menu-acordeon'),
@@ -193,6 +202,7 @@
   });
 
   d.addEventListener('keyup', (e) => {
+    if( e.keyCode=='32') return false;
     if (e.keyCode == '37' || e.keyCode == '38' || e.keyCode == '39' || e.keyCode == '40') {
       var url = location.href,
         dataObject = [];
